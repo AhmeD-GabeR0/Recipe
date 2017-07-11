@@ -1,15 +1,32 @@
-import { Recipe } from 'app/recipes/recipe.model';
-import { EventEmitter } from '@angular/core';
+import { Recipe } from './recipe.model';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Ingredient } from '../shared/ingredient.model';
+import {ShoppingListService} from '../shopping-list/shopping-list.service';
 
+@Injectable()
 
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
    private recipes: Recipe[] = [
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'),
-    new Recipe('Another Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg')
+    new Recipe('Alferado', 'Tasty Alferdo', 'http://img.sndimg.com/food/image/upload/v1/img/recipes/39/08/7/piccZDaro.jpg', [
+      new Ingredient('Pasta', 25),
+      new Ingredient('French Fries', 30)
+    ]),
+    new Recipe('Cheese Burger', 'Awsome Burger !', 'https://i.ytimg.com/vi/a40xP-CvBAw/maxresdefault.jpg', [
+      new Ingredient('Burger Meat', 3),
+      new Ingredient('Buns', 2)
+    ])
   ];
+
+  constructor(private slService: ShoppingListService) {
+
+
+  }
   getRecipe() {
    return this.recipes.slice(); // to create a new copy of the array of recipes so that when we change
    // it not changed the recipe array in recipe service
+  }
+  addIngredientToSl(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
   }
 }
