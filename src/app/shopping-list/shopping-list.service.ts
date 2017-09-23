@@ -28,4 +28,8 @@ export class ShoppingListService {
     this.ingredients[index] = newIngredients;
     this.IngredientChanged.emit(this.ingredients.slice());
   }
+  deleteIngredients(index: number) {
+    this.ingredients.splice(index , 1);
+    this.IngredientChanged.emit(this.ingredients.slice());
+  }
 }
