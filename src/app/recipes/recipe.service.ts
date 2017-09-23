@@ -26,6 +26,9 @@ recepeSelected = new EventEmitter<Recipe>();
    return this.recipes.slice(); // to create a new copy of the array of recipes so that when we change
    // it not changed the recipe array in recipe service
   }
+  getRecipeIndex(index: number) {
+    return this.recipes[index];
+  }
   addIngredientToSl(ingredients: Ingredient[]) {
     this.slService.addIngredients(ingredients);
   }
